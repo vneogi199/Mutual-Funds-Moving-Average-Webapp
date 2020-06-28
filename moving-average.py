@@ -110,7 +110,7 @@ def display_6mma_12_mma_buy_sell_decision(fund_name, df_list):
     st.subheader('SMA 6 Months:' + str(round(final_df.loc[final_df.index[-1], 'SMA_6'], 4)))
     st.subheader('SMA 12 Months:' + str(round(final_df.loc[final_df.index[-1], 'SMA_12'], 4)))
     st.subheader('Signal: ' +("BUY :arrow_up:" if final_df.loc[final_df.index[-1], 'SMA_6'] > final_df.loc[final_df.index[-1], 'SMA_12'] else "SELL :arrow_down:"))
-    st.text('Last updated: ' + str(final_df.index[-1].strftime("%d/%m/%Y")))
+    st.write('*Last updated: ' + str(final_df.index[-1].strftime("%d/%m/%Y")))
 
 def read_fund_data(fund_name):
     '''
@@ -158,6 +158,9 @@ def main():
     st.title("Mutual Funds Moving Average Webapp")
     st.subheader('View 6 Month and 12 Month Simple Moving Average for Mutual Funds')
     st.write('Disclaimer: This webapp is made for knowledge purposes only and should not be considered as investment advice. Please perform your own research before making any decisions.')
+    st.markdown('Use technical indicator of 6 Month Moving Average and 12 Month Moving Average to make buy/sell decisions (based on [Momentum Investing Principle](https://en.wikipedia.org/wiki/Momentum_investing))')
+    st.markdown('**Method: At the start of every month check if 6 Month Moving Average > 12 Month Moving Average if so buy, otherwise sell.**')
+    st.markdown('[Motivation](https://freefincal.com/do-not-use-sips-for-small-cap-mutual-funds-try-this-instead/)')
     option = st.selectbox('Select Mutual Fund', list(amfi_codes.keys()))
     st.write('OR')
     amfi_code_input = st.text_input(label='Enter AMFI code')
