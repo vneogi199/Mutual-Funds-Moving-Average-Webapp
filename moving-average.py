@@ -143,7 +143,6 @@ def main():
     st.title("Mutual Funds Moving Average Webapp")
     st.subheader('View 6 Month and 12 Month Simple Moving Average for Mutual Funds')
     st.write('Disclaimer: This webapp is made for knowledge purposes only and should not be considered as investment advice. Please perform your own research before making any decisions.')
-    refresh_data()
     option = st.selectbox('Select Mutual Fund', list(amfi_codes.keys()))
     st.write('OR')
     amfi_code_input = st.text_input(label='Enter AMFI code')
