@@ -128,9 +128,9 @@ def checkValidAmfiCode(amfi_code_input):
 
 # Run refresh everyday at 9.30am
 schedule.every().day.at("09:30").do(refresh_data)
-# while True:
-#     schedule.run_pending()
-    # time.sleep(1)
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 
 # Steamlit Config
 if st.checkbox('Dark Mode'):
