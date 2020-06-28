@@ -31,18 +31,17 @@ amfi_codes = {
 c_year = int(datetime.datetime.now().year)
 years = range(2015, c_year + 1)
 
+@st.cache
 def refresh_data():
     '''
     Get updated data from AMFI website
     '''
-    st.write('Refreshing data. Please wait...')
     if not os.path.exists('data'):
         os.mkdir('data')
 
     # Loop over all funds, get their nav data and save it as csv
     for fund_name, code in amfi_codes.items():
         get_fund_data(fund_name, code)
-    st.write('Data refresh complete!!!')
 
 
 def get_fund_data(fund_name, code):
@@ -128,26 +127,31 @@ def checkValidAmfiCode(amfi_code_input):
 
 # Run refresh everyday at 9.30am
 schedule.every().day.at("09:30").do(refresh_data)
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+# while True:
+#     schedule.run_pending()
 
-# Steamlit Config
-if st.checkbox('Dark Mode'):
-    st.markdown('''<style>
-        body, .stCheckbox, .Widget > label >div, label {
-            color: #fff !important;
-            background-color: #000 !important;
-        }
-        </style>''', unsafe_allow_html=True)
+def main():
+    # Steamlit Config
+    if st.checkbox('Dark Mode'):
+        st.markdown('''<style>
+            body, .stCheckbox, .Widget > label >div, label {
+                color: #fff !important;
+                background-color: #000 !important;
+            }
+            </style>''', unsafe_allow_html=True)
 
-st.title("Mutual Funds Moving Average Webapp")
-st.subheader('View 6 Month and 12 Month Simple Moving Average for Mutual Funds')
-option = st.selectbox('Select Mutual Fund', list(amfi_codes.keys()))
-st.write('OR')
-amfi_code_input = st.text_input(label='Enter AMFI code')
-st.markdown('[View list of AMFI codes](https://raw.githubusercontent.com/NayakwadiS/mftool/master/Scheme_codes.txt)')
-if(amfi_code_input):
-    checkValidAmfiCode(amfi_code_input)
-else:
-    read_fund_data(option)
+    st.title("Mutual Funds Moving Average Webapp")
+    st.subheader('View 6 Month and 12 Month Simple Moving Average for Mutual Funds')
+    st.write('Disclaimer: This webapp is made for knowledge purposes only and should not be considered as investment advice. Please perform your own research before making any decisions.')
+    refresh_data()
+    option = st.selectbox('Select Mutual Fund', list(amfi_codes.keys()))
+    st.write('OR')
+    amfi_code_input = st.text_input(label='Enter AMFI code')
+    st.markdown('[View list of AMFI codes](https://raw.githubusercontent.com/NayakwadiS/mftool/master/Scheme_codes.txt)')
+    if(amfi_code_input):
+        checkValidAmfiCode(amfi_code_input)
+    else:
+        read_fund_data(option)
+
+if __name__=='__main__':
+    main()
