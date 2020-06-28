@@ -77,7 +77,7 @@ def display_6mma_12_mma_buy_sell_decision(fund_name, df_list):
     final_df['SMA_12'] = final_df.iloc[:, 0].rolling(window=12).mean()
     max_nav = max(final_df.iloc[:, 0])
     final_df['buy_sell_signal'] = (final_df['SMA_6'] > final_df['SMA_12']).map({True: max_nav, False: 0})
-    fig = px.line(final_df, x=final_df.index, y=['nav', 'SMA_6', 'SMA_12', 'buy_sell_signal'], height=500, color_discrete_map = {'buy_sell_signal': 'black'})
+    fig = px.line(final_df, x=final_df.index, y=['nav', 'SMA_6', 'SMA_12', 'buy_sell_signal'], color_discrete_map = {'buy_sell_signal': 'black'})
     fig.update_layout(
         title={
             'text': fund_name,
@@ -88,14 +88,15 @@ def display_6mma_12_mma_buy_sell_decision(fund_name, df_list):
         xaxis_title="Year",
         yaxis_title="Value"
     )
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
     st.write('When black line is highest, the signal is BUY. When the black line is 0, the signal is SELL.')
     
     st.header('Current Status:')
-    st.subheader('NAV:' + str(final_df.loc[final_df.index[-1], 'nav']))
-    st.subheader('SMA 6 Months:' + str(final_df.loc[final_df.index[-1], 'SMA_6']))
-    st.subheader('SMA 12 Months:' + str(final_df.loc[final_df.index[-1], 'SMA_12']))
+    st.subheader('NAV:' + str(round(final_df.loc[final_df.index[-1], 'nav'], 4)))
+    st.subheader('SMA 6 Months:' + str(round(final_df.loc[final_df.index[-1], 'SMA_6'], 4)))
+    st.subheader('SMA 12 Months:' + str(round(final_df.loc[final_df.index[-1], 'SMA_12'], 4)))
     st.subheader('Signal: ' +("BUY :arrow_up:" if final_df.loc[final_df.index[-1], 'SMA_6'] > final_df.loc[final_df.index[-1], 'SMA_12'] else "SELL :arrow_down:"))
+    st.text('Last updated: ' + str(final_df.index[-1].strftime("%d/%m/%Y")))
 
 def read_fund_data(fund_name):
     '''
