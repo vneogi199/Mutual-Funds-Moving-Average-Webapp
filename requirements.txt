@@ -1,0 +1,6 @@
+mftool
+pandas
+matplotlib
+streamlit
+plotly
+schedule
