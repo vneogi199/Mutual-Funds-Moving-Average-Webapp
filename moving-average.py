@@ -86,7 +86,21 @@ def display_6mma_12_mma_buy_sell_decision(fund_name, df_list):
             'xanchor': 'center',
             'yanchor': 'top'},
         xaxis_title="Year",
-        yaxis_title="Value"
+        yaxis_title="Value",
+        height=700,
+        legend=dict(
+            x=0.5,
+            y=-0.35,
+            bordercolor="Black",
+            borderwidth=1
+        ),
+        margin=dict(
+            l=0,
+            r=0,
+            t=70,
+            b=0,
+            pad=0
+        )
     )
     st.plotly_chart(fig, use_container_width=True)
     st.write('When black line is highest, the signal is BUY. When the black line is 0, the signal is SELL.')
