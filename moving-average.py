@@ -19,9 +19,9 @@ amfi_codes = {
     'Axis Midcap': '120505',
     'HDFC Small Cap': '130503',
     'ICICI Prudential Equity & Debt': '120251',
-    'ICICI Prudential Technology': '120594',
     'Nippon India Gold Savings': '118663',
     'Nippon India Large Cap': '118632',
+    'Parag Parikh Long Term Equity': '122639',
     'Tata Digital India': '135800',
     'UTI Nifty': '120716'
 }
@@ -110,7 +110,6 @@ def display_6mma_12_mma_buy_sell_decision(fund_name, df_list):
     st.subheader('SMA 6 Months:' + str(round(final_df.loc[final_df.index[-1], 'SMA_6'], 4)))
     st.subheader('SMA 12 Months:' + str(round(final_df.loc[final_df.index[-1], 'SMA_12'], 4)))
     st.subheader('Signal: ' +("BUY :arrow_up:" if final_df.loc[final_df.index[-1], 'SMA_6'] > final_df.loc[final_df.index[-1], 'SMA_12'] else "SELL :arrow_down:"))
-    st.write('*Last updated: ' + str(final_df.index[-1].strftime("%d/%m/%Y")))
 
 def read_fund_data(fund_name):
     '''
