@@ -1,4 +1,4 @@
-# Mutual-Funds-Moving-Average-Webapp 💹
+# Mutual-Funds-Moving-Average-Webapp 📈
 ## Table of Contents
   * [Disclaimer](#disclaimer)
   * [Demo](#demo)
