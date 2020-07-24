@@ -65,7 +65,8 @@ TODO
 
 
 ## Credits
-TODO
+* [mftool](https://github.com/NayakwadiS/mftool) - Used this tool for getting NAV data for every mutual fund.
+* [Rohit Swami](https://github.com/rowhitswami) - Referred README file from [this](https://github.com/rowhitswami/Indian-Paper-Currency-Prediction/blob/master/README.md) repository.
 
 
 
